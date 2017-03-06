@@ -31,6 +31,15 @@
                                 <span title="{{ connected_iface.get_form_factor_display }}">{{ connected_iface }}</span>
                             </td>
                         {% endwith %}
+                    {% elif iface.circuit_termination %}
+                        {% with iface.circuit_termination.get_peer_termination.interface as connected_iface %}
+                            <td class="configured_device" data="{{ connected_iface.device }}">
+                                <a href="{% url 'dcim:device' pk=connected_iface.device.pk %}">{{ connected_iface.device }}</a>
+                            </td>
+                            <td class="configured_interface" data="{{ connected_iface }}">
+                                <span title="{{ connected_iface.get_form_factor_display }}">{{ connected_iface }}</span>
+                            </td>
+                        {% endwith %}
                     {% else %}
                         <td colspan="2">None</td>
                     {% endif %}
